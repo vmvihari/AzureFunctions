@@ -1,27 +1,26 @@
 # Module 1: The Foundation (Junior)
 
-## Concepts
+Welcome to Module 1! Before writing any code, it is crucial to build a strong theoretical foundation. In an enterprise environment, understanding *how* the underlying architecture works is just as important as knowing the syntax.
 
-### 1. In-Process vs. Isolated Worker Model
-Azure Functions in .NET used to run in the same process as the host (`In-Process`). Microsoft now recommends the **Isolated Worker Model**.
-*   **Why?** It runs your function code in a separate .NET worker process. This completely decouples your code from the Azure Functions host, meaning you have full control over the startup, dependency injection, and you avoid dependency conflicts with the host process.
-*   **Standard:** All modern .NET 8+ enterprise apps use Isolated Worker.
+The lessons below provide deep dives into the core mechanics of Azure Functions. After reviewing these lessons, you will have the knowledge required to confidently design, discuss, and implement modern serverless applications.
 
-### 2. Local Development
-*   **Azurite:** A local emulator that mimics Azure Storage (Blob, Queue, Table). Azure Functions requires a storage account to manage its internal state (like timer locks). Azurite allows you to run locally without an Azure subscription.
-*   **Azure Functions Core Tools:** The CLI that allows you to run `func start` and test your functions locally.
+## Course Lessons
 
-### 3. Triggers & Bindings
-*   **Trigger:** What causes the function to run (e.g., an HTTP request, a timer firing, a message on a queue). A function can only have **one** trigger.
-*   **Binding:** A declarative way to connect to data from within your code (e.g., reading from Cosmos DB or writing to a Service Bus). You can have multiple input and output bindings.
+Please read through the following lessons in order:
 
-### 4. Dependency Injection (DI)
-Because we are using the Isolated Worker model, the startup looks exactly like a standard ASP.NET Core application (`Program.cs`). You can inject `IConfiguration`, `ILogger`, and your custom services.
-
-### 5. Unit Testing
-Testing Azure Functions involves mocking triggers (like `HttpRequestData`) and checking the outputs. We use `xUnit` and `Moq`.
+1.  **[Lesson 1: Azure Functions Hosting Models](./lesson-1-hosting-models.md)**
+    *   Understand the architectural shift from In-Process to the modern Isolated Worker model and why it matters for enterprise development.
+2.  **[Lesson 2: Local Development Environment](./lesson-2-local-development.md)**
+    *   Learn how the Azure Functions Core Tools, `local.settings.json`, and Azurite emulate the cloud environment on your local machine.
+3.  **[Lesson 3: Triggers and Bindings](./lesson-3-triggers-and-bindings.md)**
+    *   Discover the defining feature of Azure Functions: how to declaratively dictate execution flow (Triggers) and data movement (Bindings) without boilerplate SDK code.
+4.  **[Lesson 4: Dependency Injection (DI)](./lesson-4-dependency-injection.md)**
+    *   Learn how to structure your application using standard .NET Core DI patterns, and understand the critical differences between Transient, Scoped, and Singleton lifetimes in a serverless context.
+5.  **[Lesson 5: Unit Testing](./lesson-5-unit-testing.md)**
+    *   Learn enterprise testing philosophies, why functions should be "thin wrappers", and how the Isolated Worker model makes mocking framework objects straightforward.
 
 ---
 
 ## Next Steps
+Once you understand the theory, it's time to write some code! 
 Open [TASK.md](./TASK.md) to begin building your project!
